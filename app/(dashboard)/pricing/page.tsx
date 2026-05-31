@@ -7,10 +7,56 @@ import { SubmitButton } from './submit-button';
 export const revalidate = 3600;
 
 export default async function PricingPage() {
-  const [prices, products] = await Promise.all([
-    getStripePrices(),
-    getStripeProducts(),
-  ]);
+  let prices: Awaited<ReturnType<typeof getStripePrices>> = [];
+  let products: Awaited<ReturnType<typeof getStripeProducts>> = [];
+  let error = false;
+
+  try {
+    [prices, products] = await Promise.all([
+      getStripePrices(),
+      getStripeProducts(),
+    ]);
+  } catch (e) {
+    console.error('Failed to fetch Stripe data:', e);
+    error = true;
+  }
+
+  if (error || products.length === 0) {
+    return (
+      <main className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+        <div className="max-w-xl mx-auto text-center">
+          <h1 className="text-3xl font-bold text-gray-900 mb-4">Pricing</h1>
+          <p className="text-gray-600 mb-8">
+            Pricing information is currently unavailable. Please check back later or contact support.
+          </p>
+          <div className="grid md:grid-cols-2 gap-8">
+            <PricingCard
+              name="Base"
+              price={800}
+              interval="month"
+              trialDays={7}
+              features={[
+                'Unlimited Usage',
+                'Unlimited Workspace Members',
+                'Email Support',
+              ]}
+            />
+            <PricingCard
+              name="Plus"
+              price={1200}
+              interval="month"
+              trialDays={7}
+              features={[
+                'Everything in Base, and:',
+                'Early Access to New Features',
+                '24/7 Support + Slack Access',
+              ]}
+            />
+          </div>
+        </div>
+      </main>
+    );
+  }
 
   const basePlan = products.find((product) => product.name === 'Base');
   const plusPlan = products.find((product) => product.name === 'Plus');
@@ -85,10 +131,12 @@ function PricingCard({
           </li>
         ))}
       </ul>
-      <form action={checkoutAction}>
-        <input type="hidden" name="priceId" value={priceId} />
-        <SubmitButton />
-      </form>
+      {priceId && (
+        <form action={checkoutAction}>
+          <input type="hidden" name="priceId" value={priceId} />
+          <SubmitButton />
+        </form>
+      )}
     </div>
   );
 }
