@@ -3,7 +3,16 @@ import { SignJWT, jwtVerify } from 'jose';
 import { cookies } from 'next/headers';
 import { NewUser } from '@/lib/db/schema';
 
-const key = new TextEncoder().encode(process.env.AUTH_SECRET);
+function getAuthSecret() {
+  const secret = process.env.AUTH_SECRET;
+  if (!secret || secret.length === 0) {
+    throw new Error(
+      'AUTH_SECRET environment variable is not set. Please add it to your environment variables. You can generate one with: openssl rand -base64 32'
+    );
+  }
+  return new TextEncoder().encode(secret);
+}
+
 const SALT_ROUNDS = 10;
 
 export async function hashPassword(password: string) {
@@ -27,11 +36,11 @@ export async function signToken(payload: SessionData) {
     .setProtectedHeader({ alg: 'HS256' })
     .setIssuedAt()
     .setExpirationTime('1 day from now')
-    .sign(key);
+    .sign(getAuthSecret());
 }
 
 export async function verifyToken(input: string) {
-  const { payload } = await jwtVerify(input, key, {
+  const { payload } = await jwtVerify(input, getAuthSecret(), {
     algorithms: ['HS256'],
   });
   return payload as SessionData;
