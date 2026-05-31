@@ -7,12 +7,17 @@ export function Terminal() {
   const [terminalStep, setTerminalStep] = useState(0);
   const [copied, setCopied] = useState(false);
   const terminalSteps = [
-    'git clone https://github.com/nextjs/saas-starter',
-    'pnpm install',
-    'pnpm db:setup',
-    'pnpm db:migrate',
-    'pnpm db:seed',
-    'pnpm dev 🎉',
+    '[23:15:01] Monitoring Offers...',
+    '[23:15:03] New Offer Detected',
+    '[23:15:03] Station: DMI4',
+    '[23:15:03] Rate: $124.50',
+    '[23:15:03] Attempting Capture...',
+    '[23:15:04] Offer Accepted ✓',
+    '',
+    '[23:20:44] Monitoring Offers...',
+    '[23:20:47] New Offer Detected',
+    '[23:20:47] Rate: $98.00',
+    '[23:20:48] Offer Accepted ✓',
   ];
 
   useEffect(() => {
@@ -58,7 +63,7 @@ export function Terminal() {
               key={index}
               className={`${index > terminalStep ? 'opacity-0' : 'opacity-100'} transition-opacity duration-300`}
             >
-              <span className="text-green-400">$</span> {step}
+              {step}
             </div>
           ))}
         </div>
