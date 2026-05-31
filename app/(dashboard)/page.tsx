@@ -14,9 +14,9 @@ export default function HomePage() {
                 <span className="block text-orange-500">Faster Than Ever</span>
               </h1>
               <p className="mt-3 text-base text-gray-500 sm:mt-5 sm:text-xl lg:text-lg xl:text-xl">
-                Capture Amazon Flex opportunities in record time with our
-                powerful automation platform. Packed with intelligent
-                monitoring, custom filters, and real-time offer detection.
+                Stop refreshing manually and monitor new opportunities in real
+                time with advanced filters, smart automation, and lightning-fast
+                offer detection.
               </p>
               <div className="mt-6 flex items-center gap-2 sm:justify-center lg:justify-start">
                 <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">
