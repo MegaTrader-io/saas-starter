@@ -1,5 +1,5 @@
 import { Button } from '@/components/ui/button';
-import { ArrowRight, Zap, SlidersHorizontal, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import { ArrowRight, Zap, SlidersHorizontal, LayoutDashboard } from 'lucide-react';
 import { Terminal } from './terminal';
 
 export default function HomePage() {
@@ -18,16 +18,6 @@ export default function HomePage() {
                 time with advanced filters, smart automation, and lightning-fast
                 offer detection.
               </p>
-              <div className="mt-6 flex items-center gap-2 sm:justify-center lg:justify-start">
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-green-100 px-3 py-1 text-sm font-medium text-green-800">
-                  <ShieldCheck className="h-4 w-4" />
-                  100% Undetectable
-                </span>
-                <span className="inline-flex items-center gap-1.5 rounded-full bg-orange-100 px-3 py-1 text-sm font-medium text-orange-800">
-                  <Zap className="h-4 w-4" />
-                  Lightning Fast
-                </span>
-              </div>
               <div className="mt-8 sm:max-w-lg sm:mx-auto sm:text-center lg:text-left lg:mx-0">
                 <a
                   href="https://vercel.com/templates/next.js/next-js-saas-starter"
