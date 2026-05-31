@@ -5,8 +5,8 @@ import { getUser, getTeamForUser } from '@/lib/db/queries';
 import { SWRConfig } from 'swr';
 
 export const metadata: Metadata = {
-  title: 'FlexGrabber | Amazon Flex Block Grabber',
-  description: 'FlexGrabber helps Amazon Flex drivers automatically monitor and capture available blocks with advanced filtering, real-time monitoring, and automated offer detection.'
+  title: 'Next.js SaaS Starter',
+  description: 'Get started quickly with Next.js, Postgres, and Stripe.'
 };
 
 export const viewport: Viewport = {
